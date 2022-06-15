@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Creación de libros</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' href='scss/custom.scss'>
+</head>
+<body>
+    <!-- Authentication div -->
+    <div id="d_auth" class="container mt-3 mb-3" hidden>
+        <h1 class="text-center">Registro e inicio de sesión</h1>
+        <form id="f_credentials">
+            <div class="row g-3">
+                <div class="col-12">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="text" id="email" name="email" placeholder="Introduce tu correo electrónico" autocomplete="username" class="form-control">
+                </div>
+                <div class="col-12">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input type="password" name="password" id="password" autocomplete="current-password" class="form-control">
+                </div>
+                <div class="col-12 mt-3 d-flex">
+                    <button id="b_login" type="button" class="btn btn-primary">Iniciar sesión</button>
+                    <button id="b_register" type="button" class="btn btn-secondary ms-auto">Registrarse</button>
+                </div>
+            </div>
+            
+        </form>
+    </div>
+    <!-- Authentication div end -->
+
+    <!-- Navbar -->
+    <nav id="n_main" class="navbar navbar-expand-lg bg-light" hidden>
+        <div class="container-fluid">
+            <h1 class="navbar-brand">Creación de libros</h1>
+            <div class="d-flex ms-auto">
+                <button id="b_logout" type="button" class="btn btn-danger btn-sm">Cerrar sesión</button>
+            </div>
+        </div>
+    </nav>
+    <!-- Navbar end -->
+
+    <div class="container text-center">
+    </div>
+
+    <!-- Box selection div -->
+    <div id="d_box" class="container mt-3 mb-3" hidden>
+        <h2>Selección de caja</h2>
+        <p>Indicar la etiqueta de la caja. Esta debe de tener el formato X9-8-7 done X es la sección, 9 es la altura (empezando por el suelo), 8 es la columna empezando por la posición más cercana a las escaleras y 7 es el identificador de caja dentro de esta sección.</p>
+        <p>Las secciones pueden ser A, B, C, D, E, F o G. Tomando como punto de referencia las escaleras:</p>
+        <ul>
+            <li>A es la derecha del primer pasillo.</li>
+            <li>B es la izquierda del primer pasillo.</li>
+            <li>C es la derecha del segundo pasillo.</li>
+            <li>D es la izquierda del segundo pasillo.</li>
+            <li>E es la izquierda, nada más entrar.</li>
+            <li>F es la oficina.</li>
+            <li>G es la habitación de la izquierda de la escalera.</li>
+        </ul>
+        <p>Si no es posible asignar un valor a la altura o la columna, indicar "0".</p>
+
+        <form id="f_box" class="m-2">
+            <div class="form-floating mb-3 row">
+                <input type="text" id="tag" name="tag" placeholder="Etiqueta de la caja" required class="form-control" pattern="[A-Ha-h]\d+-\d+-\d+">
+                <label for="tag">Etiqueta de la caja - ejemplo: B3-2-4</label>
+            </div>
+            <div class="row">
+                <button id="b_select" type="submit" class="btn btn-primary btn-block">Seleccionar caja</button>
+            </div>
+        </form>
+    </div>
+    <!-- Box selection div end -->
+
+    <!-- Book creation div -->
+    <div id="d_createBook" class="container" hidden>
+        <form id="f_searchBook">
+            <div class="row mt-4">
+                <label for="isbn" class="col-sm-1 col-form-label">ISBN</label>
+                <input type="text" name="isbn" id="isbn" class="form-control" required placeholder="9788415729204">
+                <button id="b_search" type="submit" class="btn btn-primary mt-2">Buscar</button>
+            </div>
+        </form>
+
+        <form id="f_createBook">
+            <div class="row mt-4">
+                <label for="title" class="form-label">Título</label>
+                <input type="text" name="title" id="title" class="form-control" required>
+            </div>
+            <div class="row mt-2">
+                <label for="author" class="form-label">Autores - separados por comas (,)</label>
+                <input type="text" name="author" id="author" class="form-control" placeholder="nombre apellido 1, nombre apellido 2, ...">
+            </div>
+            <div class="row mt-2">
+                <label for="publisher" class="form-label">Editorial</label>
+                <input type="text" name="publisher" id="publisher" class="form-control">
+            </div>
+            <div class="row mt-2">
+                <label for="price" class="form-label">Precio (€)</label>
+                <input type="number" step="any" name="price" id="price" class="form-control">
+            </div>
+            <div class="row mt-2">
+                <label for="year" class="form-label">Año</label>
+                <input type="text" name="year" id="year" class="form-control">
+            </div>
+            <div class="row mt-2">
+                <label for="pages" class="form-label">Páginas</label>
+                <input type="text" name="pages" id="pages" class="form-control">
+            </div>
+            <div class="row mt-2">
+                <label for="language" class="form-label">Idioma</label>
+                <input type="text" name="language" id="language" class="form-control">
+            </div>
+            <div class="row mt-2">
+                <label for="description" class="form-label">Descripción</label>
+                <textarea name="description" id="description" cols="30" rows="10" class="form-control"></textarea>
+            </div>
+            <div class="row mt-2">
+                <label for="tags" class="form-label">Etiquetas - separadas por comas (,)</label>
+                <input type="text" name="tags" id="tags" class="form-control" placeholder="etiqueta 1, etiqueta 2, ...">
+            </div>
+            <div class="mt-3 d-flex justify-content-between">
+                <button id="b_create" type="submit" class="btn btn-success">Crear libro</button>
+                <button id="b_undo" type="button" class="btn btn-secondary" hidden>Deshacer</button>
+            </div>
+        </form>
+        <div class="row mt-3 mb-3">
+            <button id="b_deselect" type="button" class="btn btn-warning">Deseleccionar caja</button>
+        </div>
+    </div>
+    <!-- Book creation div end -->
+
+    <script type="module" src='src/main.js'></script>
+</body>
+</html>
