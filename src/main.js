@@ -32,7 +32,6 @@ const root = ref(db, "/");
 // Elements
 const b_undo = document.getElementById("b_undo");
 const b_register = document.getElementById("b_register");
-const b_login = document.getElementById("b_login");
 const b_logout = document.getElementById("b_logout");
 const b_deselect = document.getElementById("b_deselect");
 
@@ -79,10 +78,8 @@ function onCreateBook(event) {
   i_isbn.focus();
 }
 function onUndo() {
-  if (Books.previousBookRef != null) {
-    Books.undo();
-    b_undo.hidden = true;
-  }
+  Books.undo();
+  b_undo.hidden = true;
 }
 
 function onCreateUser() {
@@ -106,7 +103,6 @@ function onBoxDeselected() {
 
 b_undo.addEventListener("click", onUndo);
 b_register.addEventListener("click", onCreateUser);
-b_login.addEventListener("click", onLogin);
 b_logout.addEventListener("click", onLogout);
 b_deselect.addEventListener("click", onBoxDeselected);
 

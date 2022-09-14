@@ -1,4 +1,4 @@
-import { set, child, get, push } from "firebase/database";
+import { set, child, get, push, runTransaction } from "firebase/database";
 import { logEvent } from "firebase/analytics";
 
 export default class Books {
@@ -109,34 +109,23 @@ export default class Books {
             // Book reference
             const bookRef = child(root, book.isbn);
 
-            // Get book (if it exists)
-            const snapshot = await get(bookRef);
-
-            // If book exists, increment the count
-            if (snapshot.exists()) {
-                let currentBook = snapshot.val();
-
-                if (currentBook.storedBoxes[this.currentBox] == null) {
-                    currentBook.storedBoxes[this.currentBox] = 1;
-                } else {
+            runTransaction(bookRef, (currentBook) => {
+                if (currentBook == null) { // If the book doesn't exist, create it
+                    this.previousBook = null;
+                    this.previousBookRef = bookRef;
+                    book.storedBoxes = {
+                        [this.currentBox]: 1
+                    }
+                    logEvent(analytics, "book_created");
+                    return book;
+                } else { // If the book exists, increment the count
+                    this.previousBook = structuredClone(currentBook);
+                    this.previousBookRef = bookRef;
                     currentBook.storedBoxes[this.currentBox]++;
+                    logEvent(analytics, "book_incremented");
+                    return currentBook;
                 }
-                const storedBoxes = currentBook.storedBoxes;
-                currentBook = book;
-                currentBook.storedBoxes = storedBoxes;
-                set(bookRef, currentBook);
-                this.previousBook = currentBook;
-                this.previousBookRef = bookRef;
-                logEvent(analytics, "book_incremented");
-            } else { // If book doesn't exist, create it
-                book.storedBoxes = {
-                    [this.currentBox]: 1
-                }
-                set(bookRef, book);
-                this.previousBook = book;
-                this.previousBookRef = bookRef;
-                logEvent(analytics, "book_created");
-            }
+            });
         }
     }
 }
