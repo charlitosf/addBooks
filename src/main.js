@@ -50,12 +50,15 @@ const i_tag = document.getElementById("tag");
 const i_password = document.getElementById("password");
 const i_email = document.getElementById("email");
 
+const t_current_box = document.getElementById("t_current_box");
+
 // User
 onAuthStateChanged(auth, (u) => {
   if (u) { 
     d_auth.hidden = true;
     n_main.hidden = false;
     Books.currentBox = Cookies.getCookie("currentBox");
+    t_current_box.innerText = Books.currentBox;
     d_box.hidden = Books.currentBox != null;
     d_createBook.hidden = Books.currentBox == null;
   } else {
