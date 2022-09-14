@@ -11,10 +11,12 @@ export default class Forms {
 
     static b_undo = document.getElementById("b_undo");
 
+    static t_current_box = document.getElementById("t_current_box");
+
     static selectBox() {
         Forms.d_box.hidden = true;
         Forms.d_createBook.hidden = false;
-        Books.currentBox = Forms.i_tag.value;
+        Forms.t_current_box.innerText = Books.currentBox = Forms.i_tag.value;
         Cookies.setCookie(process.env.CURRENT_BOX_TAG_COOKIE_NAME, Forms.i_tag.value, process.env.CURRENT_BOX_TAG_COOKIE_EXPIRE_DAYS);
         Forms.i_tag.value = "";
     }

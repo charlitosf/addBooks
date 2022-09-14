@@ -57,8 +57,7 @@ onAuthStateChanged(auth, (u) => {
   if (u) { 
     d_auth.hidden = true;
     n_main.hidden = false;
-    Books.currentBox = Cookies.getCookie("currentBox");
-    t_current_box.innerText = Books.currentBox;
+    t_current_box.innerText = Books.currentBox = Cookies.getCookie("currentBox");
     d_box.hidden = Books.currentBox != null;
     d_createBook.hidden = Books.currentBox == null;
   } else {
@@ -108,7 +107,6 @@ function onLogout() {
 function onBoxSelected(event) {
   event.preventDefault();
   i_tag.value = i_tag.value.toUpperCase();
-  t_current_box.innerText = Books.currentBox;
   Forms.selectBox();
 }
 function onBoxDeselected() {
