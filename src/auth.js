@@ -6,23 +6,23 @@ export default class Auth {
      * @param auth - The firebase.auth.Auth instance.
      * @returns The return value of the function is the return value of the try block.
      */
-    static createUser(auth) {
+    static async createUser(auth) {
         const email = document.getElementById("email").value;
         const password = document.getElementById("password").value;
         try {
-            return createUserWithEmailAndPassword(auth, email, password);
+            return await createUserWithEmailAndPassword(auth, email, password);
         } catch (error) {
-            return error;
+            return false;
         }
     }
 
-    static signIn(auth) {
+    static async signIn(auth) {
         const email = document.getElementById("email").value;
         const password = document.getElementById("password").value;
         try {
-            return signInWithEmailAndPassword(auth, email, password);
+            return await signInWithEmailAndPassword(auth, email, password);
         } catch (error) {
-            return error;
+            return false;
         }
     }
 

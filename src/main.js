@@ -87,18 +87,18 @@ function onUndo() {
   b_undo.hidden = true;
 }
 
-function onCreateUser() {
+async function onCreateUser() {
   if (i_password.value.length < 6 || !/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(i_email.value)) {
     alert("El email debe ser válido y la contraseña debe tener al menos 6 caracteres");
   } else {
-    if (!Auth.createUser(auth)) {
+    if (! (await Auth.createUser(auth))) {
       alert("Error al crear el usuario");
     }
   }
 }
-function onLogin(event) {
+async function onLogin(event) {
   event.preventDefault();
-  if (!Auth.signIn(auth)) {
+  if (! (await Auth.signIn(auth))) {
     alert("Error al iniciar sesión");
   }
 }
