@@ -91,12 +91,16 @@ function onCreateUser() {
   if (i_password.value.length < 6 || !/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(i_email.value)) {
     alert("El email debe ser válido y la contraseña debe tener al menos 6 caracteres");
   } else {
-    Auth.createUser(auth);
+    if (!Auth.createUser(auth)) {
+      alert("Error al crear el usuario");
+    }
   }
 }
 function onLogin(event) {
   event.preventDefault();
-  Auth.signIn(auth);
+  if (!Auth.signIn(auth)) {
+    alert("Error al iniciar sesión");
+  }
 }
 function onLogout() {
   Auth.logout(auth);
