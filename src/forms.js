@@ -40,16 +40,8 @@ export default class Forms {
         const i_tags = document.getElementById("tags");
 
         i_title.value = book.title;
-        if (book.authors != null && book.authors.length > 0) {
-            i_author.value = "";
-            for (let author of book.authors) {
-                i_author.value += author + ", ";
-            }
-            // Remove the trailing comma and space
-            i_author.value = i_author.value.slice(0, -2);
-        } else {
-            i_author.value = "";
-        }
+        i_author.value = "";
+        this._showListInInput(i_author, book.authors);
 
         i_price.value = book.price || "";
         i_publisher.value = book.publisher || "";
@@ -57,19 +49,11 @@ export default class Forms {
         i_pages.value = book.pageCount || "";
         i_language.value = book.language || "";
         i_description.value = book.description || "";
-        if (book.tags != null && book.tags.length > 0) {
-            i_tags.value = "";
-            for (let tag of book.tags) {
-                i_tags.value += tag + ", ";
-            }
-            // Remove the trailing comma and space
-            i_tags.value = i_tags.value.slice(0, -2);
-        } else {
-            i_tags.value = "";
-        }
+        i_tags.value = "";
+        this._showListInInput(i_tags, book.tags);
     }
 
-    static createBook(root, analytics) {
+    static async createBook(root, analytics) {
         const i_title = document.getElementById("title");
         const i_author = document.getElementById("author");
         const i_price = document.getElementById("price");
@@ -95,7 +79,7 @@ export default class Forms {
         };
 
         try {
-            Books.createBook(root, book, analytics);
+            await Books.createBook(root, book, analytics);
             // Clear the form
             i_title.value = "";
             i_author.value = "";
@@ -111,5 +95,14 @@ export default class Forms {
         } catch (error) {
             alert(error);
         }
+    }
+
+    static _showListInInput(input, list) {
+        input.value = "";
+        for (let item of list) {
+            input.value += item + ", ";
+        }
+        // Remove the trailing comma and space
+        input.value = input.value.slice(0, -2);
     }
 }
