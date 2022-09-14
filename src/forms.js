@@ -1,4 +1,5 @@
 import Books from "./books.js";
+import Cookies from "./cookies.js";
 
 export default class Forms {
 
@@ -14,6 +15,7 @@ export default class Forms {
         Forms.d_box.hidden = true;
         Forms.d_createBook.hidden = false;
         Books.currentBox = Forms.i_tag.value;
+        Cookies.setCookie(process.env.CURRENT_BOX_TAG_COOKIE_NAME, Forms.i_tag.value, process.env.CURRENT_BOX_TAG_COOKIE_EXPIRE_DAYS);
         Forms.i_tag.value = "";
     }
 
@@ -21,6 +23,7 @@ export default class Forms {
         Forms.d_box.hidden = false;
         Forms.d_createBook.hidden = true;
         Books.currentBox = null;
+        Cookies.eraseCookie(process.env.CURRENT_BOX_TAG_COOKIE_NAME);
     }
 
     static showBook(book) {

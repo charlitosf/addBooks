@@ -8,6 +8,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Auth from './auth.js';
 import Books from './books.js';
 import Forms from './forms.js';
+import Cookies from "./cookies.js";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -50,9 +51,16 @@ const i_tag = document.getElementById("tag");
 
 // User
 onAuthStateChanged(auth, (u) => {
-  d_auth.hidden = u ? true : false;
-  n_main.hidden = d_box.hidden = u ? false : true;
-  d_createBook.hidden = true;
+  if (u) { 
+    d_auth.hidden = true;
+    n_main.hidden = false;
+    Books.currentBox = Cookies.getCookie("currentBox");
+    d_box.hidden = Books.currentBox != null;
+    d_createBook.hidden = Books.currentBox == null;
+  } else {
+    d_auth.hidden = false;
+    n_main.hidden = d_box.hidden = d_createBook.hidden = true;
+  }
 });
 
 async function onSearchBook(event) {
