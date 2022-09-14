@@ -48,7 +48,7 @@
     <!-- Box selection div -->
     <div id="d_box" class="container mt-3 mb-3" hidden>
         <h2>Selección de caja</h2>
-        <p>Indicar la etiqueta de la caja. Esta debe de tener el formato XY7-8-9.</p>
+        <p>Indicar la etiqueta de la caja. Esta debe de tener el formato PQ7-8-9.</p>
         <form id="f_box" class="m-2">
             <div class="form-floating mb-3 row">
                 <input type="text" id="tag" name="tag" placeholder="Etiqueta de la caja" required class="form-control" pattern="[A-Za-z]{2}\d+-\d+-\d+">
@@ -61,8 +61,8 @@
         <p>
             Explicación:
             <ul>
-                <li>X es el destinatario de la caja.</li>
-                <li>Y es la sección.</li>
+                <li>P es el destinatario de la caja.</li>
+                <li>Q es la sección.</li>
                 <li>7 es la altura de la balda sobre la que está la caja (empezando por el suelo).</li>
                 <li>8 es la columna empezando por la posición más cercana a las escaleras.</li>
                 <li>9 es el identificador de caja dentro de esta sección.</li>
@@ -74,6 +74,7 @@
             <li>D para David.</li>
             <li>V para Chento.</li>
             <li>A para Alicia.</li>
+            <li>R para Raquel.</li>
         </ul>
         <p>Las secciones pueden ser A, B, C, D, E, F o G. Tomando como punto de referencia las escaleras:</p>
         <ul>
@@ -83,7 +84,7 @@
             <li>D es la izquierda del segundo pasillo.</li>
             <li>E es la izquierda, nada más entrar.</li>
             <li>F es la oficina.</li>
-            <li>G es la habitación de la izquierda de la escalera.</li>
+            <li>G es la habitación de la derecha de la escalera.</li>
         </ul>
         <p>Si no es posible asignar un valor a la altura o la columna, indicar "0".</p>
 
