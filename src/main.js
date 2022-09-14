@@ -104,6 +104,7 @@ function onLogout() {
 function onBoxSelected(event) {
   event.preventDefault();
   i_tag.value = i_tag.value.toUpperCase();
+  t_current_box.innerText = Books.currentBox;
   Forms.selectBox();
 }
 function onBoxDeselected() {
