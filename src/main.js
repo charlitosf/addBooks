@@ -47,6 +47,8 @@ const d_createBook = document.getElementById("d_createBook");
 
 const i_isbn = document.getElementById("isbn");
 const i_tag = document.getElementById("tag");
+const i_password = document.getElementById("password");
+const i_email = document.getElementById("email");
 
 // User
 onAuthStateChanged(auth, (u) => {
@@ -83,7 +85,11 @@ function onUndo() {
 }
 
 function onCreateUser() {
-  Auth.createUser(auth);
+  if (i_password.value.length < 6 || !/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(i_email.value)) {
+    alert("El email debe ser válido y la contraseña debe tener al menos 6 caracteres");
+  } else {
+    Auth.createUser(auth);
+  }
 }
 function onLogin(event) {
   event.preventDefault();
