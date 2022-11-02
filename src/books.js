@@ -121,8 +121,13 @@ export default class Books {
                 } else { // If the book exists, increment the count
                     this.previousBook = structuredClone(currentBook);
                     this.previousBookRef = bookRef;
-                    currentBook.storedBoxes[this.currentBox]++;
-                    logEvent(analytics, "book_incremented");
+                    if (currentBook.storedBoxes[this.currentBox] == null) {
+                        currentBook.storedBoxes[this.currentBox] = 1;
+                        logEvent(analytics, "book_new_box");
+                    } else {
+                        currentBook.storedBoxes[this.currentBox]++;
+                        logEvent(analytics, "book_incremented");
+                    }
                     return currentBook;
                 }
             });
